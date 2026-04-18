@@ -1,0 +1,28 @@
+import React from "react";
+
+// Corner coordinate markers — architectural measurement motif
+export default function CoordMarker({ code = "X-00", position = "tl", className = "" }) {
+  const positions = {
+    tl: "top-4 left-4",
+    tr: "top-4 right-4",
+    bl: "bottom-4 left-4",
+    br: "bottom-4 right-4",
+  };
+
+  const lines = {
+    tl: "before:top-0 before:left-0 before:w-3 before:h-px after:top-0 after:left-0 after:w-px after:h-3",
+    tr: "before:top-0 before:right-0 before:w-3 before:h-px after:top-0 after:right-0 after:w-px after:h-3",
+    bl: "bottom-0 left-0",
+    br: "bottom-0 right-0",
+  };
+
+  return (
+    <div className={`absolute ${positions[position]} pointer-events-none z-10 ${className}`}>
+      <div className="relative flex items-center gap-2">
+        <span className="w-2 h-px bg-foreground/40" />
+        <span className="text-micro text-foreground/50">{code}</span>
+        <span className="w-2 h-px bg-foreground/40" />
+      </div>
+    </div>
+  );
+}
