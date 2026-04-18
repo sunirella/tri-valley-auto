@@ -1,0 +1,80 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
+const SYMPTOMS = [
+  { v: "check_engine",   l: "Check Engine" },
+  { v: "smog_inspection",l: "Smog" },
+  { v: "fluid_leak",     l: "Fluid Leak" },
+  { v: "brakes",         l: "Brakes" },
+  { v: "overheating",    l: "Overheat" },
+  { v: "oil_change",     l: "Oil Change" },
+];
+
+const TIMELINES = [
+  { v: "immediate",  l: "Today" },
+  { v: "this_week",  l: "This Week" },
+  { v: "next_week",  l: "Next Week" },
+  { v: "flexible",   l: "Flexible" },
+];
+
+export default function RapidIntake() {
+  const [symptom,  setSymptom]  = useState("check_engine");
+  const [timeline, setTimeline] = useState("this_week");
+  const navigate = useNavigate();
+
+  return (
+    <div className="w-full bg-card border-t border-b border-hairline">
+      <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_1fr_auto] items-stretch">
+
+          {/* Label */}
+          <div className="hidden md:flex items-center px-6 border-r border-hairline">
+            <span className="font-display font-bold text-base uppercase text-muted-foreground whitespace-nowrap">Quick Intake</span>
+          </div>
+
+          {/* Symptom */}
+          <div className="py-4 px-5 md:px-6 border-b md:border-b-0 md:border-r border-hairline">
+            <div className="text-micro text-muted-foreground mb-2">Service Needed</div>
+            <div className="flex flex-wrap gap-1.5">
+              {SYMPTOMS.map((s) => (
+                <button key={s.v} onClick={() => setSymptom(s.v)}
+                  className={`text-label px-3 py-1.5 transition-all duration-150 ${
+                    symptom === s.v
+                      ? "bg-accent text-accent-foreground"
+                      : "bg-muted text-foreground/60 hover:text-foreground hover:bg-secondary"
+                  }`}>
+                  {s.l}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Timeline */}
+          <div className="py-4 px-5 md:px-6 border-b md:border-b-0 md:border-r border-hairline">
+            <div className="text-micro text-muted-foreground mb-2">When?</div>
+            <div className="flex flex-wrap gap-1.5">
+              {TIMELINES.map((t) => (
+                <button key={t.v} onClick={() => setTimeline(t.v)}
+                  className={`text-label px-3 py-1.5 transition-all duration-150 ${
+                    timeline === t.v
+                      ? "bg-accent text-accent-foreground"
+                      : "bg-muted text-foreground/60 hover:text-foreground hover:bg-secondary"
+                  }`}>
+                  {t.l}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <button onClick={() => navigate(`/book?symptom=${symptom}&timeline=${timeline}`)}
+            className="group flex items-center justify-center gap-3 bg-accent text-accent-foreground px-8 py-4 font-display font-bold text-xl uppercase hover:bg-highlight transition-colors duration-200 min-w-[180px]">
+            Get a Slot
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
