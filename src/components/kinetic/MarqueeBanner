@@ -1,0 +1,26 @@
+import React from "react";
+
+const ITEMS = [
+  "25% OFF OIL CHANGES THIS MONTH",
+  "$79 SMOG INSPECTIONS",
+  "FREE DIAGNOSTICS WITH ANY SERVICE",
+  "SAME-DAY APPOINTMENTS AVAILABLE",
+  "EUROPEAN VEHICLE SPECIALIST",
+  "4.4 ★ ON GOOGLE · 28 VERIFIED REVIEWS",
+];
+
+export default function MarqueeBanner() {
+  const repeated = [...ITEMS, ...ITEMS]; // doubled for seamless loop
+  return (
+    <div className="bg-accent text-accent-foreground overflow-hidden py-3 border-b border-accent/50">
+      <div className="flex animate-marquee whitespace-nowrap">
+        {repeated.map((item, i) => (
+          <span key={i} className="flex items-center gap-6 mx-8 font-display font-bold text-base md:text-lg uppercase tracking-wide flex-shrink-0">
+            {item}
+            <span className="text-accent-foreground/50 text-xl">·</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
