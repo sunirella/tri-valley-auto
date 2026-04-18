@@ -1,1 +1,73 @@
 
+{
+  "name": "Appointment",
+  "type": "object",
+  "properties": {
+    "customer_name": {
+      "type": "string",
+      "description": "Full name of the customer"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Customer phone number"
+    },
+    "email": {
+      "type": "string",
+      "description": "Customer email"
+    },
+    "vehicle": {
+      "type": "string",
+      "description": "Year, make, model of vehicle"
+    },
+    "symptom": {
+      "type": "string",
+      "enum": [
+        "check_engine",
+        "smog_inspection",
+        "fluid_leak",
+        "brakes",
+        "overheating",
+        "oil_change",
+        "diagnostic",
+        "other"
+      ],
+      "description": "Reported symptom or requested service"
+    },
+    "timeline": {
+      "type": "string",
+      "enum": [
+        "immediate",
+        "this_week",
+        "next_week",
+        "flexible"
+      ],
+      "description": "When the service is needed"
+    },
+    "preferred_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Preferred appointment date"
+    },
+    "diagnostic_log": {
+      "type": "string",
+      "description": "Detailed description of the issue"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "confirmed",
+        "in_service",
+        "resolved",
+        "cancelled"
+      ],
+      "default": "pending",
+      "description": "Current status of the appointment"
+    }
+  },
+  "required": [
+    "customer_name",
+    "phone",
+    "symptom"
+  ]
+}
