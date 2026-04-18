@@ -1,0 +1,68 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+export default function Footer() {
+  return (
+    <footer className="bg-card border-t border-hairline">
+      <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-16 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+          <div className="md:col-span-5">
+            <div className="font-display font-black uppercase leading-none mb-4"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
+              TRI VALLEY<br />
+              <span className="text-accent">AUTO SERVICE</span>
+            </div>
+            <p className="text-[14px] text-muted-foreground font-body leading-relaxed max-w-xs mb-6">
+              Owner-operated auto repair in Pleasanton, CA. Honest diagnostics, fair prices, real results.
+            </p>
+            <a href="tel:+19256008975"
+              className="font-display font-bold text-xl uppercase text-accent hover:text-highlight transition-colors flex items-center gap-2">
+              <span className="live-dot" /> (925) 600-8975
+            </a>
+          </div>
+
+          <div className="md:col-span-3 md:col-start-7">
+            <div className="text-micro text-muted-foreground mb-5">QUICK LINKS</div>
+            <ul className="space-y-3">
+              {[
+                { l: "Services", href: "/#services" },
+                { l: "Current Offers", href: "/#offers" },
+                { l: "Reviews", href: "/#ledger" },
+                { l: "Contact", href: "/#contact" },
+                { l: "Book Now", href: "/book", accent: true },
+              ].map((item) => (
+                <li key={item.l}>
+                  {item.href.startsWith("/") && !item.href.startsWith("/#") ? (
+                    <Link to={item.href}
+                      className={`font-display font-bold text-lg uppercase ${item.accent ? "text-accent hover:text-highlight" : "text-foreground/70 hover:text-foreground"} transition-colors`}>
+                      {item.l}
+                    </Link>
+                  ) : (
+                    <a href={item.href}
+                      className={`font-display font-bold text-lg uppercase ${item.accent ? "text-accent hover:text-highlight" : "text-foreground/70 hover:text-foreground"} transition-colors`}>
+                      {item.l}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-3">
+            <div className="text-micro text-muted-foreground mb-5">LOCATION</div>
+            <address className="not-italic font-display font-bold text-lg uppercase text-foreground/80 leading-snug space-y-1">
+              <div>4212 First St</div>
+              <div>Pleasanton, CA 94566</div>
+            </address>
+            <div className="mt-4 text-micro text-muted-foreground">MON–FRI · 8AM–5PM</div>
+          </div>
+        </div>
+
+        <div className="mt-14 pt-6 border-t border-hairline flex flex-wrap items-center justify-between gap-3 text-micro text-muted-foreground">
+          <span>© {new Date().getFullYear()} TRI VALLEY AUTO SERVICE · PLEASANTON, CA</span>
+          <span>STAR CERTIFIED · EPA · BAR LICENSED</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
